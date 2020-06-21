@@ -4,6 +4,9 @@ const http = require('http').Server(app);
 const path = require('path');
 const io = require('socket.io')(http);
 
+const dotenv = require("dotenv");
+dotenv.config();
+
 const uri = process.env.MONGODB_URI;
 const port = process.env.PORT || 5000;
 
@@ -20,7 +23,7 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'build')));
 io.on('connection', (socket) => {
 
     // Get the last 10 messages from the database.
-    Message.find().sort({ createdAt: -1 }).limit(10).exec((err, messages) => {
+    Message.find().sort({ createdAt: 1 }).limit(10).exec((err, messages) => {
         if (err) return console.error(err);
 
         // Send the last messages to the user.
