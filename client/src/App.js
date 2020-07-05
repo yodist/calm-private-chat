@@ -21,9 +21,11 @@ class App extends React.Component {
 
   componentDidMount() {
     this.socket = io(config[process.env.NODE_ENV].endpoint);
+    console.log(process.env.NODE_ENV);
 
     // Load the last 10 messages in the window.
     this.socket.on('init', (msg) => {
+      console.log(msg[0].content);
       this.setState((state) => ({
         chat: [...state.chat, ...msg.reverse()],
       }), this.scrollToBottom);
