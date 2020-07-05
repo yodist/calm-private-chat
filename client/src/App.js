@@ -20,6 +20,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    // Set web title
+    document.title = "Calm Private Chat";
+
     this.socket = io(config[process.env.NODE_ENV].endpoint);
 
     // Load the last 10 messages in the window.
